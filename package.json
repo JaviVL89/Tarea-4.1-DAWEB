@@ -1,5 +1,5 @@
 {
-  "name": "ud-4",
+  "name": "tarea-4-1",
   "version": "1.0.0",
   "description": "Este archivo se escribe en formato markdown.",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/JaviVL89/Tarea-4.1-DAWEB.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "jverlop89",
   "license": "ISC",
   "bugs": {
     "url": "https://https://github.com/JaviVL89/Tarea-4.1-DAWEB/issues"
