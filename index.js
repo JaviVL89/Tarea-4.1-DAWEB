@@ -55,22 +55,29 @@ let concesionarios = [
   },
 ];
 
-// Lista todos los coches
-app.get("/coches", (request, response) => {
-  response.json(coches);
+// Obtener todos los concesionarios
+app.get("/concesionarios", (req, res) => {
+  res.json(concesionarios);
 });
 
-// Añadir un nuevo coche
-app.post("/coches", (request, response) => {
-  coches.push(request.body);
-  response.json({ message: "ok" });
+// Crear un nuevo concesionario
+app.post("/concesionarios", (req, res) => {
+  const nuevoConcesionario = req.body;
+  nuevoConcesionario.id = concesionarios.length + 1;
+  concesionarios.push(nuevoConcesionario);
+  res.json({ message: "Concesionario añadido correctamente", concesionario: nuevoConcesionario });
 });
 
-// Obtener un solo coche
-app.get("/coches/:id", (request, response) => {
-  const id = request.params.id;
-  const result = coches[id];
-  response.json({ result });
+// Obtener un concesionario por ID
+app.get("/concesionarios/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const concesionario = concesionarios.find((c) => c.id === id);
+
+  if (concesionario) {
+    res.json(concesionario);
+  } else {
+    res.status(404).json({ message: "Concesionario no encontrado" });
+  }
 });
 
 // Actualizar un solo coche
