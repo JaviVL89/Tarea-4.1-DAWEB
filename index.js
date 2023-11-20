@@ -68,7 +68,7 @@ app.post("/concesionarios", (req, res) => {
   res.json({ message: "Concesionario añadido correctamente", concesionario: nuevoConcesionario });
 });
 
-// Obtener un concesionario por ID
+// Obtener un concesionario
 app.get("/concesionarios/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const concesionario = concesionarios.find((c) => c.id === id);
@@ -80,17 +80,37 @@ app.get("/concesionarios/:id", (req, res) => {
   }
 });
 
-// Actualizar un solo coche
-app.put("/coches/:id", (request, response) => {
-  const id = request.params.id;
-  coches[id] = request.body;
-  response.json({ message: "ok" });
+// Actualizar un concesionario
+app.put("/concesionarios/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const concesionarioIndex = concesionarios.findIndex((c) => c.id === id);
+
+  if (concesionarioIndex !== -1) {
+    concesionarios[concesionarioIndex] = { ...concesionarios[concesionarioIndex], ...req.body };
+    res.json({
+      message: "Concesionario actualizado correctamente",
+      concesionario: concesionarios[concesionarioIndex],
+    });
+  } else {
+    res.status(404).json({ message: "Concesionario no encontrado" });
+  }
 });
 
-// Borrar un elemento del array
-app.delete("/coches/:id", (request, response) => {
-  const id = request.params.id;
-  coches = coches.filter((item) => coches.indexOf(item) !== id);
+// Borrar un concesionario
+app.delete("/concesionarios/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  concesionarios = concesionarios.filter((c) => c.id !== id);
+  res.json({ message: "Concesionario eliminado correctamente" });
+});
 
-  response.json({ message: "ok" });
+// Obtener todos los coches de un concesionario
+app.get("/concesionarios/:id/coches", (req, res) => {
+  const id = parseInt(req.params.id);
+  const concesionario = concesionarios.find((c) => c.id === id);
+
+  if (concesionario) {
+    res.json(concesionario.coches);
+  } else {
+    res.status(404).json({ message: "Concesionario no encontrado" });
+  }
 });
