@@ -17,6 +17,11 @@ const app = express();
 // Indicamos que la aplicación puede recibir JSON (API Rest)
 app.use(express.json());
 
+//Conectamos con la base de datos
+mongoose.connect("mongodb://localhost:27017/concesionariosDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 // Indicamos el puerto en el que vamos a desplegar la aplicación
 const port = process.env.PORT || 8080;
 
