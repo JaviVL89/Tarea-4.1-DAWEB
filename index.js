@@ -30,6 +30,19 @@ app.listen(port, () => {
   console.log(`Servidor desplegado en puerto: ${port}`);
 });
 
+// definimos una estructura para los concesionarios
+const concesionarioSchema = new mongoose.Schema({
+  nombre: String,
+  direccion: String,
+  coches: [
+    {
+      modelo: String,
+      cv: Number,
+      precio: Number,
+    },
+  ],
+});
+
 // Definimos una estructura de datos
 // (temporal hasta incorporar una base de datos)
 let concesionarios = [
