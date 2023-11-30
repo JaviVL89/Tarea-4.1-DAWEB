@@ -10,12 +10,16 @@
 const express = require("express");
 //Importamos la biblioteca mongoose
 const mongoose = require("mongoose");
+//Importamos helmet
+const helmet = require("helmet");
 
 // Inicializamos la aplicación
 const app = express();
 
 // Indicamos que la aplicación puede recibir JSON (API Rest)
 app.use(express.json());
+// Utilizamos helmet para proteger nuestra API contra ataques CSRF, XSS, etc...
+app.use(helmet());
 
 //Conectamos con la base de datos
 mongoose.connect("mongodb://localhost:27017/concesionariosDB", {
