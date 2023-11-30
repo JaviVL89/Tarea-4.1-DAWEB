@@ -55,6 +55,18 @@ app.get("/concesionarios", async (req, res) => {
     res.status(500).send("Error al obtener los concesionarios");
   }
 });
+
+// Crear un nuevo concesionario
+app.post("/concesionarios", async (req, res) => {
+  try {
+    const nuevoConcesionario = new Concesionario(req.body);
+    await nuevoConcesionario.save();
+    res.json({ message: "Concesionario añadido correctamente", concesionario: nuevoConcesionario });
+  } catch (error) {
+    res.status(500).json({ message: "Error al crear el concesionario" });
+  }
+});
+
 // Definimos una estructura de datos
 // (temporal hasta incorporar una base de datos)
 let concesionarios = [
