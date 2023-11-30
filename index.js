@@ -43,6 +43,9 @@ const concesionarioSchema = new mongoose.Schema({
   ],
 });
 
+//Definimos un modelo del esquema
+const ConcesionarioModelo = mongoose.model("Concesionario", concesionarioSchema);
+
 // Definimos una estructura de datos
 // (temporal hasta incorporar una base de datos)
 let concesionarios = [
