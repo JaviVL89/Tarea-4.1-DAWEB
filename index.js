@@ -46,6 +46,15 @@ const concesionarioSchema = new mongoose.Schema({
 //Definimos un modelo del esquema
 const ConcesionarioModelo = mongoose.model("Concesionario", concesionarioSchema);
 
+// Obtener todos los concesionarios
+app.get("/concesionarios", async (req, res) => {
+  try {
+    const concesionarios = await Concesionario.find();
+    res.json(concesionario);
+  } catch (error) {
+    res.status(500).send("Error al obtener los concesionarios");
+  }
+});
 // Definimos una estructura de datos
 // (temporal hasta incorporar una base de datos)
 let concesionarios = [
