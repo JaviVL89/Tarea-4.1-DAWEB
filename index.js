@@ -12,6 +12,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 //Importamos la biblioteca mongoose
 const mongoose = require("mongoose");
+const db = require("./conexiondb");
 //Importamos helmet
 const helmet = require("helmet");
 
@@ -27,11 +28,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Utilizamos helmet para proteger nuestra API contra ataques CSRF, XSS, etc...
 app.use(helmet());
 
-//Conectamos con la base de datos
-mongoose.connect("mongodb://localhost:27017/concesionariosDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 // Indicamos el puerto en el que vamos a desplegar la aplicación
 const port = process.env.PORT || 8080;
 
@@ -55,6 +51,8 @@ const concesionarioSchema = new mongoose.Schema({
 
 //Definimos un modelo del esquema
 const ConcesionarioModelo = mongoose.model("Concesionario", concesionarioSchema);
+
+db();
 
 // Obtener todos los concesionarios
 app.get("/concesionarios", async (req, res) => {
