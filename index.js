@@ -8,6 +8,8 @@
 // Importamos las bibliotecas necesarias.
 // Concretamente el framework express.
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 //Importamos la biblioteca mongoose
 const mongoose = require("mongoose");
 //Importamos helmet
@@ -18,6 +20,10 @@ const app = express();
 
 // Indicamos que la aplicación puede recibir JSON (API Rest)
 app.use(express.json());
+
+//Configuración de swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Utilizamos helmet para proteger nuestra API contra ataques CSRF, XSS, etc...
 app.use(helmet());
 
